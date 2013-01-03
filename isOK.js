@@ -44,7 +44,7 @@ define('isOK', ['jquery'], function($) {
             }
 
             function validate(rule, el) {
-                if (rule.test) {
+                if (rules !== null && rule.test) {
                     return runCustomTest(rule.test, el);
                 } else {
                     if (el.attr('required') && el.val().length === 0 ) {
