@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>isOK.js</title>
+        <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css">
+    </head>
+    <body>
+        <form style="display: none">
+            <input type="text" name="test1" />                                         <!-- Should Pass -->
+            <input type="text" name="test2" required />                                <!-- Should Fail -->
+            <input type="text" name="test3" required value="Lorem Ipsum" />            <!-- Should Pass -->
+
+            <input type="email" name="test4" />                                        <!-- Should Pass -->
+            <input type="email" name="test5" required />                               <!-- Should Fail -->
+            <input type="email" name="test6" required value="Lorem Ipsum" />           <!-- Should Fail -->
+            <input type="email" name="test7" required value="john@johnhamelink.com" /> <!-- Should Pass -->
+
+            <input type="tel" name="test8" />                                          <!-- Should Pass -->
+            <input type="tel" name="test9" required />                                 <!-- Should Fail -->
+            <input type="tel" name="test10" required value="Lorem Ipsum" />             <!-- Should Fail -->
+            <input type="tel" name="test11" required value="+441234567890" />           <!-- Should Pass -->
+
+            <textarea name="test12"></textarea>                                         <!-- Should Pass -->
+            <textarea name="test13" required></textarea>                                <!-- Should Fail -->
+            <textarea name="test14" required>Lorem ipsum</textarea>                     <!-- Should Pass -->
+
+            <textarea name="test15" required>Lorem ipsum</textarea>                     <!-- Should Fail -->
+            <textarea name="test16" required>john@johnhamelink.com</textarea>           <!-- Should Pass -->
+
+            <fieldset> <!-- Should return true -->
+                <input type="checkbox" name="test17" id="test17a" value="true" />
+                <input type="checkbox" name="test17" id="test17b" value="true" />
+                <input type="checkbox" name="test17" id="test17c" value="true" />
+            </fieldset>
+
+            <fieldset> <!-- Should return false -->
+                <input type="checkbox" name="test18" id="test18a" value="true" required />
+                <input type="checkbox" name="test18" id="test18b" value="true" required />
+                <input type="checkbox" name="test18" id="test18c" value="true" required />
+            </fieldset>
+
+            <fieldset> <!-- Should return true -->
+                <input type="checkbox" name="test19" id="test19a" value="true" required />
+                <input type="checkbox" name="test19" id="test19b" value="true" checked="checked" required />
+                <input type="checkbox" name="test19" id="test19c" value="true" required />
+            </fieldset>
+
+            <fieldset> <!-- Should return true -->
+                <input type="radio" name="test20" id="test20a" value="true" />
+                <input type="radio" name="test20" id="test20b" value="true" />
+                <input type="radio" name="test20" id="test20c" value="true" />
+            </fieldset>
+
+            <fieldset> <!-- Should return false -->
+                <input type="radio" name="test21" id="test21a" value="true" required />
+                <input type="radio" name="test21" id="test21b" value="true" required />
+                <input type="radio" name="test21" id="test21c" value="true" required />
+            </fieldset>
+
+            <fieldset> <!-- Should return true -->
+                <input type="radio" name="test22" id="test22a" value="true" required />
+                <input type="radio" name="test22" id="test22b" value="true" checked="checked" required />
+                <input type="radio" name="test22" id="test22c" value="true" required />
+            </fieldset>
+
+            <!-- Should return true -->
+            <select name="test23" id="test23">
+                <option value="true">1</option>
+                <option value="true">2</option>
+                <option value="true">3</option>
+            </select>
+
+            <!-- Should return false -->
+            <select name="test24" id="test24" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+            <!-- Should return true -->
+            <select name="test25" id="test25" required>
+                <option value="true">1</option>
+                <option value="true" selected="selected">2</option>
+                <option value="true">3</option>
+            </select>
+
+            <!-- Should return true -->
+            <select name="test26" id="test26" required multiple>
+                <option value="true">1</option>
+                <option value="true" selected="selected">2</option>
+                <option value="true">3</option>
+            </select>
+
+            <!-- Should return true -->
+            <select name="test23" id="test23" required multiple>
+                <option value="true" selected="selected">1</option>
+                <option value="true" selected="selected">2</option>
+                <option value="true">3</option>
+            </select>
+
+        </form>
+        <div id="qunit"></div>
+        <script src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+        <script src="https://raw.github.com/keithamus/qunit-logging/master/qunit-logging.js"></script>
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="../isOK.js"></script>
+
+        <script src="suite/textinput.js"></script>
+        <script src="suite/textarea.js"></script>
+        <script src="suite/checkbox.js"></script>
+        <script src="suite/radio.js"></script>
+        <script src="suite/select.js"></script>
+
+    </body>
+</html>

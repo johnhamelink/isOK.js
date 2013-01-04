@@ -1,0 +1,33 @@
+{
+    "name" : "isOK",
+    "version" : "0.1.0",
+    "description" : "Lightweight validation with easy custom callbacks",
+    "keywords" : [
+        "validation",
+        "html",
+        "forms"
+    ],
+    "homepage" : "https://github.com/johnhamelink/isOK.js",
+    "bugs" : "https://github.com/johnhamelink/isOK.js/issues",
+    "author" : {
+        "name" : "John Hamelink",
+        "web"  : "http://johnhamelink.com"
+    },
+    "main" : "isOK.js",
+    "repository" : {
+        "type" : "git",
+        "url"  : "git@github.com:johnhamelink/isOK.js.git"
+    },
+    "scripts" : {
+        "test" : "node test/node-index.js"
+    },
+    "dependencies" : {},
+    "devDepedencies" : {
+        "qunit" : "~0.5.15"
+    },
+    "licenses" : [{
+        "type" : "MIT",
+        "url"  : "http://mit-license.org/"
+    }]
+}
+
