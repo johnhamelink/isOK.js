@@ -4,6 +4,9 @@
  * This jQuery plugin provides super-simple validation, and a
  * callback to handle the success or failure of the validation.
  *
+ * This jQuery plugin is designed for use with an AMD-compatible
+ * JS loader such as requireJS.
+ *
  * @author John Hamelink <john@johnhamelink.com>
  * @package isOK
  * @copyright 2012 John Hamelink
@@ -16,7 +19,9 @@
  *
  */
 
+
 (function($){
+
     $.fn.isOK = function (config, success, fail) {
 
         function findInRules(config, key) {
@@ -44,20 +49,17 @@
             // then don't run the custom test
             if (rule !== null && rule.test) {
                 return runCustomTest(rule.test, el);
-            // If there's no custom test, check to see if the element is
-            // marked as "required".
+                // If there's no custom test, check to see if the element is
+                // marked as "required".
             } else if (el.attr('required')) {
                 // If the element is a checkbox or radio button, check it against
                 // its siblings in order to get a correct result (right now we're
                 // just testing one element, not all of them collectively, so we
                 // need to factor them in).
                 if (el.attr('type') == "checkbox" || el.attr('type') == "radio") {
-                    if (el.siblings("[name="+el.attr('name')+"]:checked").length){
-                        return true;
-                    } else {
-                        return false;
-                    }
-                // Just a generic test
+                    // Run the checkbox sibling traversal function
+                    return config.isOKSiblingTraversal(el);
+                    // Just a generic test
                 } else if (
                     el.val() == null ||
                     el.val() == "" ||
@@ -70,6 +72,17 @@
             return true;
         }
 
+        var defaults = {
+            'isOKSiblingTraversal' : function(el) {
+                if(el.siblings('[name="' + el.attr('name') + '"]:checked').length === 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        };
+
+        config     = $.extend(defaults, config);
         var el     = $(this);
         var rule   = findInRules(config, el.attr('name'));
         var result = validate(rule, el);
