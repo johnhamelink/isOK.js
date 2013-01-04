@@ -3,6 +3,8 @@
 A tiny, simplistic validation plugin for jQuery, inspired by happy.js, and using
 AMD.
 
+[![Build Status](https://travis-ci.org/johnhamelink/isOK.js.png?branch=master)](https://travis-ci.org/johnhamelink/isOK.js)
+
 ##Perks:
 
  - Build your own validation with custom validation callbacks
