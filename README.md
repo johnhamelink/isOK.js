@@ -1,6 +1,7 @@
 #isOK.js
 
-A tiny, simplistic validation plugin for jQuery, inspired by happy.js
+A tiny, simplistic validation plugin for jQuery, inspired by happy.js. When
+compiled, isOK.js comes out at a miserly 504 bytes (311 bytes gzipped).
 
 [![Build Status](https://travis-ci.org/johnhamelink/isOK.js.png?branch=master)](https://travis-ci.org/johnhamelink/isOK.js)
 
