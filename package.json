@@ -23,7 +23,7 @@
     },
     "dependencies" : {},
     "devDepedencies" : {
-        "qunit" : "~0.5.15",
+        "qunit" : "~0.5.15"
     },
     "licenses" : [{
         "type" : "MIT",
