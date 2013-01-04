@@ -4,8 +4,6 @@
  * This jQuery plugin provides super-simple validation, and a
  * callback to handle the success or failure of the validation.
  *
- * This jQuery plugin is designed for use with an AMD-compatible
- * JS loader such as requireJS.
  *
  * @author John Hamelink <john@johnhamelink.com>
  * @package isOK
