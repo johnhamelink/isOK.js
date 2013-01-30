@@ -4,7 +4,6 @@
  * This jQuery plugin provides super-simple validation, and a
  * callback to handle the success or failure of the validation.
  *
- *
  * @author John Hamelink <john@johnhamelink.com>
  * @package isOK
  * @copyright 2012 John Hamelink
@@ -16,7 +15,6 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
 
 (function($){
 
@@ -45,11 +43,20 @@
         function validate(rule, el) {
             // If there are no rules or custom test defined,
             // then don't run the custom test
-            if (rule !== null && rule.test) {
+            if (rule !== null && rule.test && config.isOKRequiredSelector(el)) {
                 return runCustomTest(rule.test, el);
                 // If there's no custom test, check to see if the element is
                 // marked as "required".
-            } else if (el.attr('required')) {
+            } else if (rule !== null && rule.test &&
+                          !(
+                            el.val() == null ||
+                            el.val() == ""   ||
+                            el.val() == []   ||
+                            el.val().length === 0
+                          )
+                      ) {
+                return runCustomTest(rule.test, el);
+            } else if (config.isOKRequiredSelector(el)) {
                 // If the element is a checkbox or radio button, check it against
                 // its siblings in order to get a correct result (right now we're
                 // just testing one element, not all of them collectively, so we
@@ -57,7 +64,7 @@
                 if (el.attr('type') == "checkbox" || el.attr('type') == "radio") {
                     // Run the checkbox sibling traversal function
                     return config.isOKSiblingTraversal(el);
-                    // Just a generic test
+                // Just a generic test
                 } else if (
                     el.val() == null ||
                     el.val() == "" ||
@@ -77,6 +84,14 @@
                 } else {
                     return true;
                 }
+            },
+            'isOKRequiredSelector' : function(el) {
+                if (el.attr('required')) {
+                    return true;
+                } else if (el.hasClass('required')) {
+                    return true;
+                }
+                return false;
             }
         };
 
